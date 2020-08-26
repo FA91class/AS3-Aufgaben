@@ -16,6 +16,8 @@ namespace Schul_Projekt
             // Aufgabe3.Run();
 
             // ISBN Prüfung
+            // 3-449-13599-X
+            // 978-3-12-732320-7
             ISBNPrüfer.isbnPrüferDialog();
 
 
