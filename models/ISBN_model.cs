@@ -13,5 +13,7 @@ namespace Schul_Projekt.models
         public bool isValid { get; set; }
 
         public int mode { get; set; }
+
+        public string origin { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace Schul_Projekt.helper
         {
             int check;
 
-            if (input.Length != length)
+            if (input.Length != 13 && input.Length != 10)
             {
                 isbn.isValid = false;
                 isbn.number = null;
@@ -27,7 +27,7 @@ namespace Schul_Projekt.helper
             }
             else
             {
-                check = input.Last();
+                check = Convert.ToInt32(input.Last().ToString());
             }
 
             isbn.checkField = check;
@@ -48,10 +48,13 @@ namespace Schul_Projekt.helper
 
         private static ISBN_model checkIsbn(string isbnString)
         {
+            ISBN_model isbn = new ISBN_model();
+            isbn.origin = isbnString;
+
             isbnString = isbnString.Replace("-", "").Replace(" ", "");
             int i;
             int result;
-            ISBN_model isbn = new ISBN_model();
+            
             ISBN_model validIsbn = validateLength(isbnString, (isbnString.Length - 1), isbn);
 
             switch (validIsbn.mode)
@@ -61,7 +64,7 @@ namespace Schul_Projekt.helper
                     result = 0;
                     foreach (char c in isbn.number)
                     {
-                        result = i * c + result;
+                        result = i * Convert.ToInt32(c) + result;
                         i++;
                     }
                     result %= 11;
@@ -71,21 +74,23 @@ namespace Schul_Projekt.helper
                     }                   
                     return validIsbn;
                 case 12:
-                    result = validIsbn.number[0]
-                        + validIsbn.number[2]
-                        + validIsbn.number[4]
-                        + validIsbn.number[6]
-                        + validIsbn.number[8]
-                        + validIsbn.number[10]
+                    result = Convert.ToInt32(validIsbn.number[0].ToString())
+                        + Convert.ToInt32(validIsbn.number[2].ToString())
+                        + Convert.ToInt32(validIsbn.number[4].ToString())
+                        + Convert.ToInt32(validIsbn.number[6].ToString())
+                        + Convert.ToInt32(validIsbn.number[8].ToString())
+                        + Convert.ToInt32(validIsbn.number[10].ToString())
                         + 3
                         * (
-                        validIsbn.number[1] +
-                        validIsbn.number[3] +
-                        validIsbn.number[5] +
-                        validIsbn.number[7] +
-                        validIsbn.number[11]
+                        Convert.ToInt32(validIsbn.number[1].ToString()) +
+                        Convert.ToInt32(validIsbn.number[3].ToString()) +
+                        Convert.ToInt32(validIsbn.number[5].ToString()) +
+                        Convert.ToInt32(validIsbn.number[7].ToString()) +
+                        Convert.ToInt32(validIsbn.number[9].ToString()) +
+                        Convert.ToInt32(validIsbn.number[11].ToString())
                         );
                     result %= 10;
+                    result = (10 - result) % 10;
                     if (result != validIsbn.checkField)
                     {
                         validIsbn.isValid = false;
@@ -104,11 +109,11 @@ namespace Schul_Projekt.helper
             ISBN_model check = checkIsbn(Console.ReadLine());
             if (check.isValid)
             {
-                Console.WriteLine("Die ISBN ist Korrekt: " + check.number + " " + check.checkField);
+                Console.WriteLine("Die ISBN " + (check.mode + 1) + " ist Korrekt: " + check.origin);
             }
             else
             {
-                Console.WriteLine("Die ISBN ist nicht Korrekt: " + check.number + " " + check.checkField);
+                Console.WriteLine("Die ISBN ist nicht Korrekt: " + check.origin);
             }
         }
     }
