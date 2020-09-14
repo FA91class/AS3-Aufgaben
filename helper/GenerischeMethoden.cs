@@ -8,7 +8,7 @@ namespace Schul_Projekt.helper
     class GenerischeMethoden<T>
     {
         private T attribut;
-        public static void getType(T value)
+        public static void GetType(T value)
         {
             Console.WriteLine("Der übergebene Datentyp der Variable '" + value + "' ist: \r\n " + typeof(T) + " / \r\n " + value.GetType());
         }

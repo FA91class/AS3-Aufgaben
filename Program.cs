@@ -21,7 +21,7 @@ namespace Schul_Projekt
             // ISBNPrüfer.isbnPrüferDialog();
 
             // Aufgabe 7.  Generische Typen
-            // GenerischeMethoden<string>.getType("Jo");
+            // GenerischeMethoden<string>.GetType("Jo");
 
             // Aufgabe 8 UseParams
             GenerischeMethoden<int>.UseParams(1, 2, 3, 4);
